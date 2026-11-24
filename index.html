@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Agenda de Horas Médicas · Centro Médico</title>
+
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bebas+Neue&family=Work+Sans:wght@400;500;600;700&display=swap"
+    rel="stylesheet" />
+
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+
+<body>
+  <main class="contenedor">
+
+    <header class="encabezado">
+      <p class="encabezado__eyebrow">Centro médico</p>
+      <h1 class="encabezado__titulo">Agenda de Horas Médicas</h1>
+    </header>
+
+    <!-- ==========================================================
+         FORMULARIO
+         Cada campo trae su <p class="error">.
+         El select valida que haya un doctor elegido y la edad
+         debe ser un número mayor que 0.
+    =========================================================== -->
+    <section class="formulario" id="seccion-agenda" aria-label="Formulario para agendar hora médica">
+      <form id="formulario">
+        <div class="campo">
+          <label for="input-paciente">
+            Nombre del paciente
+          </label>
+          <input 
+            type="text" 
+            placeholder="Ej: Juan Pérez Soto" 
+            name="nombre"
+          />
+          <p 
+            class="error" 
+          </p>
+        </div>
+
+        <div class="campo">
+          <label for="select-doctor">Doctor</label>
+          <select name="doctor">
+            <option value="0">-- Seleccione --</option>
+            <option value="1">Dra. Camila González</option>
+            <option value="2">Dr. Matías Rojas</option>
+            <option value="3">Dra. Valentina Muñoz</option>
+          </select>
+          <p class="error" id="error-doctor"></p>
+        </div>
+
+        <div class="campo">
+          <label for="input-edad">Edad</label>
+          <input 
+            type="text" 
+            placeholder="Ej: 35" 
+            name="edad"
+          />
+
+          <p 
+            class="error" 
+            id="error-edad"
+          >
+          </p>
+        </div>
+
+        <button 
+          type="submit" 
+          id="btn-agendar"
+        >Agendar hora
+        </button>
+
+      </form>
+    </section>
+
+    <!-- ==========================================================
+         TABLA DE HORAS AGENDADAS
+    =========================================================== -->
+    <section class="tabla" aria-label="Horas agendadas">
+      <div class="tabla__scroll">
+        <table id="tabla">
+          <thead>
+            <tr>
+              <th>Paciente</th>
+              <th>Doctor</th>
+              <th>Edad</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!-- Las filas se agregan aquí dinámicamente con JS -->
+            <tr>
+              <td>María Fernández</td>
+              <td>Dr. Matías Rojas</td>
+              <td>42 años</td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+    </section>
+
+    <!-- ==========================================================
+         ESTADÍSTICAS — cantidad de pacientes por doctor.
+         Actualizar el número cada vez que se agende una hora.
+    =========================================================== -->
+    <section class="estadisticas" aria-label="Estadísticas por doctor">
+      <h2 class="estadisticas__titulo">Pacientes por doctor</h2>
+      <div class="estadisticas__grid">
+        <div class="stat-card stat--gonzalez">
+          <span class="stat-card__numero">0</span>
+          <span class="stat-card__label">Dra. González</span>
+        </div>
+        <div class="stat-card stat--rojas">
+          <span class="stat-card__numero">0</span>
+          <span class="stat-card__label">Dr. Rojas</span>
+        </div>
+        <div class="stat-card stat--munoz">
+          <span class="stat-card__numero">0</span>
+          <span class="stat-card__label">Dra. Muñoz</span>
+        </div>
+        <div class="stat-card stat--total">
+          <span class="stat-card__numero">0</span>
+          <span class="stat-card__label">Total</span>
+        </div>
+      </div>
+    </section>
+
+  </main>
+  <script src="js/script.js" defer></script>
+</body>
+
+</html>

@@ -1,0 +1,311 @@
+/* ==========================================================
+   VARIABLES
+=========================================================== */
+:root {
+  --bg: #2b2b2e;
+  --surface: #38383c;
+  --border: #4a4a4f;
+
+  --text: #f2f1ef;
+  --text-muted: #b7b5b3;
+
+  --acento: #38bdf8;
+  --error: #ff6b6b;
+  --exito: #4ade80;
+
+  /* color asignado a cada doctor */
+  --dr-gonzalez: #a78bfa;
+  --dr-rojas: #34d399;
+  --dr-munoz: #fb923c;
+
+  --font-display: "Bebas Neue", Impact, sans-serif;
+  --font-body: "Work Sans", Arial, sans-serif;
+
+  --radius: 14px;
+  --espacio: 1.5rem;
+}
+
+/* ==========================================================
+   BASE
+=========================================================== */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  padding: 2.5rem 1.5rem;
+  background: var(--bg);
+  color: var(--text);
+  font-family: var(--font-body);
+  line-height: 1.5;
+}
+
+.contenedor {
+  max-width: 46rem;
+  margin: 0 auto;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
+
+/* ==========================================================
+   ENCABEZADO
+=========================================================== */
+.encabezado {
+  margin-bottom: 2rem;
+}
+
+.encabezado__eyebrow {
+  margin: 0 0 0.25rem;
+  color: var(--acento);
+  font-size: 0.85rem;
+  font-weight: 600;
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+}
+
+.encabezado__titulo {
+  margin: 0;
+  font-family: var(--font-display);
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 400;
+  letter-spacing: 0.03em;
+  text-transform: uppercase;
+}
+
+/* ==========================================================
+   FORMULARIO
+=========================================================== */
+.formulario {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: var(--espacio);
+  margin-bottom: var(--espacio);
+}
+
+.campo {
+  margin-bottom: 1.1rem;
+}
+
+.campo label {
+  display: block;
+  margin-bottom: 0.35rem;
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.campo input[type="text"],
+.campo input[type="number"],
+.campo select {
+  width: 100%;
+  padding: 0.65rem 0.8rem;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 8px;
+  color: var(--text);
+  font-family: var(--font-body);
+  font-size: 1rem;
+}
+
+.campo input::placeholder {
+  color: var(--text-muted);
+}
+
+.campo input:focus-visible,
+.campo select:focus-visible,
+button:focus-visible {
+  outline: 2px solid var(--acento);
+  outline-offset: 2px;
+}
+
+/* Reserva espacio aunque esté vacío para que el formulario no salte */
+.error {
+  min-height: 1.1em;
+  margin: 0.3rem 0 0;
+  color: var(--error);
+  font-size: 0.85rem;
+}
+
+button[type="submit"] {
+  padding: 0.75rem 1.75rem;
+  background: var(--acento);
+  color: var(--bg);
+  border: none;
+  border-radius: 8px;
+  font-family: var(--font-body);
+  font-weight: 700;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+button[type="submit"]:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 6px 16px rgba(56, 189, 248, 0.25);
+}
+
+button[type="submit"]:active {
+  transform: translateY(0);
+}
+
+.mensaje {
+  margin: 1rem 0 0;
+  font-weight: 700;
+  min-height: 1.2em;
+}
+
+.mensaje.error {
+  color: var(--error);
+}
+
+.mensaje.exito {
+  color: var(--exito);
+}
+
+/* ==========================================================
+   TABLA DE HORAS MÉDICAS
+=========================================================== */
+.tabla {
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  padding: 0.5rem;
+  margin-bottom: var(--espacio);
+}
+
+.tabla__scroll {
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+  min-width: 26rem;
+}
+
+th,
+td {
+  padding: 0.75rem 1rem;
+  text-align: center;
+  border-bottom: 1px solid var(--border);
+}
+
+thead th {
+  color: var(--acento);
+  font-size: 0.8rem;
+  font-weight: 700;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+}
+
+tbody tr:hover {
+  background: rgba(56, 189, 248, 0.06);
+}
+
+tbody tr:last-child td {
+  border-bottom: none;
+}
+
+/* Color de fondo de la fila según el doctor asignado.
+   Aplicar con JS a cada <tr> al insertarla, ej:
+   fila.classList.add("bg-gonzalez") */
+tbody tr.bg-gonzalez {
+  background: rgba(167, 139, 250, 0.16);
+}
+
+tbody tr.bg-rojas {
+  background: rgba(52, 211, 153, 0.16);
+}
+
+tbody tr.bg-munoz {
+  background: rgba(251, 146, 60, 0.16);
+}
+
+tbody tr.bg-gonzalez:hover,
+tbody tr.bg-rojas:hover,
+tbody tr.bg-munoz:hover {
+  filter: brightness(1.15);
+}
+
+/* Insignia opcional para la celda del doctor,
+   ej: <span class="tag tag--gonzalez">Dra. Camila González</span> */
+.tag {
+  display: inline-block;
+  padding: 0.2rem 0.65rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--bg);
+}
+
+.tag--gonzalez { background: var(--dr-gonzalez); }
+.tag--rojas { background: var(--dr-rojas); }
+.tag--munoz { background: var(--dr-munoz); }
+
+/* ==========================================================
+   ESTADÍSTICAS — pacientes por doctor
+=========================================================== */
+.estadisticas__titulo {
+  margin: 0 0 1rem;
+  font-size: 1.1rem;
+}
+
+.estadisticas__grid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 0.9rem;
+}
+
+.stat-card {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 1rem 0.5rem 0.85rem;
+  background: var(--surface);
+  border: 1px solid var(--border);
+  border-top: 4px solid var(--border);
+  border-radius: 0 0 10px 10px;
+}
+
+.stat-card__numero {
+  font-family: var(--font-display);
+  font-size: 2rem;
+  line-height: 1;
+}
+
+.stat-card__label {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+  text-align: center;
+}
+
+.stat--gonzalez { border-top-color: var(--dr-gonzalez); }
+.stat--rojas { border-top-color: var(--dr-rojas); }
+.stat--munoz { border-top-color: var(--dr-munoz); }
+.stat--total { border-top-color: var(--acento); }
+.stat--total .stat-card__numero { color: var(--acento); }
+
+/* ==========================================================
+   RESPONSIVE
+=========================================================== */
+@media (max-width: 480px) {
+  body {
+    padding: 1.5rem 1rem;
+  }
+
+  .formulario,
+  .tabla {
+    padding: 1rem;
+  }
+
+  .estadisticas__grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
